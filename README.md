@@ -7,7 +7,7 @@
 3. Download the file and place inside the Sublist3r folder from step 1.
 4. Example for running the file -
                                    
-  python subknock.py -d domain.com -j -c -v -w wordlist.txt -e engine1,engine2
+  ``` python subknock.py -d domain.com -j -c -v -w wordlist.txt -e engine1,engine2 ```
                      
 
 
