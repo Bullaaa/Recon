@@ -35,6 +35,8 @@ ap.add_argument("-S","--silent",action='store_true',help="Silent")
 
 ap.add_argument("-r","--resolve",type=str,help="resolve ip or domain name")
 
+ap.add_argument("-oS","--operatingSystem",type=str,help="operating system you use[mac,linux,windows]")
+
 #ap.add_argument("","",type=,help="")
 
 
@@ -52,6 +54,8 @@ if args.domain:
 else:
 	ap.print_help()
 
+if args.operatingSystem:
+	os = args.operatingSystem
 
 # def run_p(command):
 # 	pid = sp.Popen(args=["open -a Terminal .","--command=%s"%command],shell=True).pid
@@ -69,7 +73,8 @@ def check_knockpy_req():
 	    command = command + "-w " + wordlist_path
 	    #print(command) 
 	else:
-	    ap.print_help()
+	    #ap.print_help()
+	    None
 	if args.json:
 	    json = True
 	    command = command + " -j" 
@@ -103,7 +108,7 @@ def check_sub_req():
 	if args.threads:
 		threads = args.threads
 	else:
-		print("Setting threads to 2")
+		print("Number of threads not specified,Setting threads to 2")
 		threads = 2
 
 	if args.output:
@@ -114,7 +119,8 @@ def check_sub_req():
 	if args.savefile:
 		savefile = args.savefile
 	else:
-		ap.print_help()
+		#ap.print_help()
+		None
 
 	if args.silent:
 		silent = True
@@ -124,21 +130,22 @@ def check_sub_req():
 	if args.ports is None:
 		ports = 80
 	else:
-		ports = args.ports.split(',')
-		print(ports)
+		ports = args.ports
+		print("Using specified ports-%d",ports)
 
 	if args.engines is None:
 		engines = None
 	elif args.engines is not None:
-		engines = args.engines.split(',')
-		print(engines)
+		engines = args.engines
+		print("Using specified engines-%s",engines)
 	else:
 		None
 
 	if args.csvfields is None:
 		csvfields = []
 	else:
-		csvfields = args.csvfields.split(',')
+		csvfields = args.csvfields
+		print("Using specified csvfields-%s",csvfields)
 	subdomains = sublist3r.main(domain, threads, output, ports, silent, verbose, bruteforce, engines)
 
 check_knockpy_req()
